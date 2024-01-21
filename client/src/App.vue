@@ -1,26 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <form @submit.prevent="handleLogin">
+      <div>
+        <label for="id">ID:</label>
+        <input type="text" id="id" v-model="id" required>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" v-model="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <button @click="goToRegister">Register</button>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      id: '',
+      password: ''
+    };
+  },
+  methods: {
+    handleLogin() {
+      // Handle the login process here
+    },
+    goToRegister() {
+      // Redirect to the registration page
+      this.$router.push('/register');
+    }
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
