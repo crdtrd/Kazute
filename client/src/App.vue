@@ -1,51 +1,36 @@
 <template>
-  <div id="app">
-    <h1>Login</h1>
-    <input v-model="userId" placeholder="User ID" />
-    <input v-model="password" type="password" placeholder="Password" />
-    <button @click="login">Login</button>
-    <button @click="register">Register</button>
+  <div>
+    <form @submit.prevent="handleLogin">
+      <div>
+        <label for="id">ID:</label>
+        <input type="text" id="id" v-model="id" required>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" v-model="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <button @click="goToRegister">Register</button>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   data() {
     return {
-      userId: '',
+      id: '',
       password: ''
     };
   },
   methods: {
-    login() {
-      axios.post('http://localhost:3000/login', {
-          userId: this.userId,
-          password: this.password
-      })
-      .then(response => {
-          console.log("Login response:", response.data);
-      })
-      .catch(error => {
-          console.error("Login error:", error);
-      });
+    handleLogin() {
+      // Handle the login process here
     },
-    register() {
-      axios.post('http://localhost:3000/register', {
-          userId: this.userId,
-          password: this.password
-      })
-      .then(response => {
-          console.log("Register response:", response.data);
-      })
-      .catch(error => {
-          console.error("Register error:", error);
-      });
+    goToRegister() {
+      // Redirect to the registration page
+      this.$router.push('/register');
     }
   }
 };
 </script>
-
-<style>
-/* Add your styles here */
-</style>
