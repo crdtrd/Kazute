@@ -11,7 +11,6 @@
       </div>
       <button type="submit">Login</button>
     </form>
-    <button @click="goToRegister">Register</button>
   </div>
 </template>
 
@@ -26,10 +25,6 @@ export default {
   methods: {
     handleLogin() {
       // Handle the login process here
-    },
-    goToRegister() {
-      // Redirect to the registration page
-      this.$router.push('/register');
     }
   }
 };
