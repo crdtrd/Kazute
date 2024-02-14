@@ -1,48 +1,35 @@
 <template>
-  <div>
-    <form @submit.prevent="handleLogin">
-      <div>
-        <label for="id">ID:</label>
-        <input type="text" id="id" v-model="id" required>
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" required>
-      </div>
-      <button type="submit">Login</button>
-    </form>
+  <div class="container">
+    <h1>Which one are you?</h1>
+    <div class="button-group">
+      <button class="btn">Student</button>
+      <button class="btn">Teacher</button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      id: '',
-      password: ''
-    };
-  },
-  methods: {
-    handleLogin() {
-      // Handle the login process here
-    }
-  }
-};
+  name: 'RoleSelection'
+}
 </script>
 
-<style>
-#app {
-  text-align: center;
-  margin-top: 60px;
-}
-
-.buttons {
+<style scoped>
+.container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 20px;
+  height: 100vh;
 }
 
-.button {
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
+.btn {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;

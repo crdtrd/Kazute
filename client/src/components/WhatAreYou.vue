@@ -1,35 +1,37 @@
 <template>
-    <div id="app">
+    <div class="container">
       <h1>Which one are you?</h1>
-      <div class="buttons">
-        <button class="button">Student</button>
-        <button class="button">Teacher</button>
+      <div class="button-group">
+        <button class="btn">Student</button>
+        <button class="btn">Teacher</button>
       </div>
     </div>
   </template>
   
   <script>
   export default {
-    name: 'App',
+    name: 'RoleSelection'
   }
   </script>
   
-  <style>
-  #app {
-    text-align: center;
-    margin-top: 60px;
-  }
-  
-  .buttons {
+  <style scoped>
+  .container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 20px;
+    height: 100vh;
   }
   
-  .button {
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+  }
+  
+  .btn {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
   }
   </style>
-  
