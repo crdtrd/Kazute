@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class="teacher-page">
     <div class="header">
-      <div class="username">{{ username }}</div>
+      <h1>{{ username }}</h1>
       <button @click="logout">Logout</button>
     </div>
-    <div class="quizzes">
-      <button v-for="quiz in quizzes" :key="quiz.id" class="quiz">
+    <div class="quiz-list">
+      <button v-for="quiz in quizzes" :key="quiz.id" class="quiz-tile" @click="selectQuiz(quiz)">
         {{ quiz.title }}
       </button>
     </div>
-    <button class="add-quiz" @click="addQuiz">Add Quiz</button>
+    <button class="add-quiz-btn" @click="addQuiz">Add Quiz</button>
   </div>
 </template>
 
@@ -17,47 +17,77 @@
 export default {
   data() {
     return {
-      username: 'Teacher1',
-      quizzes: [
-        { id: 1, title: 'Quiz 1' },
-        { id: 2, title: 'Quiz 2' },
-        { id: 3, title: 'Quiz 3' },
-        // Add more quizzes as needed
-      ],
+      username: 'Teacher123', // Dummy username
+      quizzes: [] // Quizzes array will be populated from dummy data
     };
   },
+  created() {
+    this.fetchQuizzes();
+  },
   methods: {
+    fetchQuizzes() {
+      // Dummy data for quizzes
+      this.quizzes = [
+        { id: 1, title: "Math Quiz" },
+        { id: 2, title: "Science Quiz" },
+        { id: 3, title: "History Quiz" },
+        // ... other quizzes
+      ];
+    },
     logout() {
-      // Clear user session and redirect to login page
-      alert('Logout clicked');
+      // Dummy logout logic
+      alert("Logged out successfully!");
+      // Implement real logout logic here
     },
     addQuiz() {
-      // Navigate to quiz creation page
-      alert('Add Quiz clicked');
+      // Dummy add quiz logic
+      const newQuizId = this.quizzes.length + 1;
+      const newQuiz = { id: newQuizId, title: `New Quiz ${newQuizId}` };
+      this.quizzes.push(newQuiz);
+      alert(`Added: ${newQuiz.title}`);
     },
-  },
-};
+    selectQuiz(quiz) {
+      // Handle quiz selection
+      alert(`Quiz selected: ${quiz.title}`);
+      // Implement the logic to navigate to the quiz details or start the quiz
+    }
+  }
+}
 </script>
 
-<style scoped>
+<style>
+.teacher-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .header {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
-.quizzes {
+.quiz-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 20px;
+  gap: 10px;
 }
-.quiz {
+.quiz-tile {
+  /* Style your buttons as needed */
+  display: block;
+  width: 100%;
+  padding: 20px;
+  margin: 5px 0;
+  text-align: center;
   background-color: #f0f0f0;
-  border: none;
-  padding: 10px;
+  border: 1px solid #ddd;
   cursor: pointer;
 }
-.add-quiz {
+.quiz-tile:hover {
+  background-color: #e0e0e0;
+}
+.add-quiz-btn {
   position: fixed;
-  right: 20px;
   bottom: 20px;
+  right: 20px;
 }
 </style>
