@@ -14,9 +14,6 @@
 </template>
 
 <script>
-import WhatAreYou from './components/WhatAreYou.vue';
-import TeacherLogin from './components/TeacherLogin.vue';
-import TeacherPage from './components/TeacherPage.vue';
 
 export default {
   data() {
