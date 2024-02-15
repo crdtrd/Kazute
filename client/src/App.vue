@@ -1,10 +1,15 @@
 <template>
   <div>
-    <button v-for="component in components" :key="component" @click="currentComponent = component">
-      Load {{ component }}
-    </button>
+    <select v-model="selectedComponent">
+      <option disabled value="">Please select one</option>
+      <option v-for="(component, name) in components" :key="name" :value="name">
+        {{ name }}
+      </option>
+    </select>
 
-    <component :is="currentComponent"></component>
+    <div v-if="selectedComponent">
+      <component :is="components[selectedComponent]" />
+    </div>
   </div>
 </template>
 
@@ -16,14 +21,22 @@ import TeacherPage from './components/TeacherPage.vue';
 export default {
   data() {
     return {
-      currentComponent: null,
-      components: ['WhatAreYou', 'TeacherLogin', 'TeacherPage']
+      selectedComponent: '',
+      components: {} // components will be loaded dynamically
     }
   },
-  components: {
-    WhatAreYou,
-    TeacherLogin,
-    TeacherPage
+  methods: {
+    async loadComponents() {
+      // Dynamically import all components from the 'components' folder
+      const context = require.context('./components/', true, /\.vue$/);
+      for (const file of context.keys()) {
+        const componentName = file.split('/').pop().split('.')[0];
+        this.components[componentName] = (await import(`./components/${componentName}.vue`)).default;
+      }
+    }
+  },
+  mounted() {
+    this.loadComponents();
   }
 }
 </script>
