@@ -1,21 +1,23 @@
 <template>
-    <div class="question-element">
-      <input type="text" v-model="question" placeholder="Question">
-      <div v-for="(option, index) in options" :key="index" class="option">
-        <input type="text" v-model="option.text" @input="updateOption(index, $event.target.value)">
-        <input type="radio" :name="radioGroupName" :value="option.text" v-model="correctAnswer">
-      </div>
-      <button @click="addOption">Add Option</button>
+  <div class="sorting-question">
+    <input type="text" v-model="question" placeholder="Question">
+
+    <div v-for="(item, index) in items" :key="index" class="sortable-item">
+      <input type="text" v-model="item.text">
+      <input type="number" v-model.number="correctOrder[index]" :min="1" :max="items.length">
     </div>
-  </template>
+
+    <button @click="addItem">Add Item</button>
+  </div>
+</template>
   
   <script>
   export default {
     data() {
       return {
         question: '',
-        options: [{ text: '' }],
-        correctAnswer: null
+        items: [{ text: '' }],
+        correctOrder: []  // Store the correct order
       };
     },
     computed: {
@@ -24,20 +26,15 @@
       }
     },
     methods: {
-      addOption() {
-        this.options.push({ text: '' });
-      },
-      updateOption(index, text) {
-        this.options[index].text = text;
-        this.$emit('update', { ...this.element, options: this.options, correctAnswer: this.correctAnswer });
+      addItem() {
+        this.items.push({ text: '' });
+        this.correctOrder.push(this.items.length);
       }
     },
     watch: {
-      question(newVal) {
-        this.$emit('update', { ...this.element, question: newVal });
-      },
-      correctAnswer(newVal) {
-        this.$emit('update', { ...this.element, correctAnswer: newVal });
+      items(newItems) {
+        // Adjust correctOrder if the number of items changes
+        this.correctOrder = newItems.map((_, index) => index + 1);
       }
     },
     props: {
