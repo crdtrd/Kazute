@@ -1,82 +1,65 @@
 <template>
-    <div class="app">
-        <header>
-            <button @click="goBack" class="back-button">Back</button>
-        </header>
-        <main>
-            <div class="waiting-message">waiting for start</div>
-            <ul class="player-list">
-                <li v-for="player in players" :key="player.id">{{ player.name }}</li>
-            </ul>
-        </main>
+    <div class="container">
+        <button class="back-button" @click="goBack">Back</button>
+        <div class="message">Waiting for start</div>
+        <div class="players">
+            <div v-for="player in players" :key="player.id" class="player">
+                {{ player.name }}
+            </div>
+        </div>
     </div>
 </template>
+
 <script>
 export default {
     data() {
         return {
-            players: []
+            players: [
+                // Sample data, replace with actual data
+                { id: 1, name: 'Player 1' },
+                { id: 2, name: 'Player 2' },
+                // ...
+            ],
         };
     },
     methods: {
         goBack() {
-            // Logic to handle back button functionality
-            this.$router.go(-1);
-        }
+            // Implement your back navigation logic here
+        },
     },
-    mounted() {
-        // Fetch the list of connected players
-        // This would be an API call to your server
-        // For example purposes, let's assume this is the response
-        this.players = [
-            { id: 1, name: 'Player 1' },
-            { id: 2, name: 'Player 2' },
-            // more players
-        ];
-    }
-}
+};
 </script>
-<style scoped>
-.app {
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-}
 
-header {
-    background-color: #f5f5f5;
+<style scoped>
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
     padding: 1em;
-    position: relative;
+    box-sizing: border-box;
 }
 
 .back-button {
     position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 0.5em 1em;
-    background-color: #3498db;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
+    top: 2em;
+    left: 1em;
 }
 
-.waiting-message {
-    font-size: 1.2em;
-    color: #555;
-    margin-top: 2em;
+.message {
+    margin-bottom: 2em;
+    font-size: 1.5em;
+    text-align: center;
 }
 
-.player-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 2em;
+.players {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.player-list li {
-    background-color: #ecf0f1;
-    margin: 0.5em;
-    padding: 0.5em;
-    border-radius: 4px;
+.player {
+    margin-bottom: 1em;
 }
 </style>
