@@ -1,101 +1,129 @@
 <template>
     <div class="quiz-page">
-        <div class="quiz-info">
-            <h2>Quiz Code: {{ quizCode }}</h2>
-            <button @click="startQuiz">Start</button>
-            <button @click="cancelQuiz">Cancel</button>
+      <div class="left-panel">
+        <div class="quiz-code">
+          <h2>Quiz Code: {{ quizCode }}</h2>
         </div>
-        <div class="players-board">
-            <h2>Connected Players</h2>
-            <ul>
-                <li v-for="player in players" :key="player.id">{{ player.name }}</li>
-            </ul>
+        <div class="buttons">
+          <button @click="startQuiz">Start</button>
+          <button @click="cancelQuiz">Cancel</button>
         </div>
+      </div>
+      <div class="right-panel">
+        <h3>Connected Players</h3>
+        <ul>
+          <li v-for="player in players" :key="player.id">{{ player.name }}</li>
+        </ul>
+      </div>
     </div>
-</template>
-
-<script>
-export default {
+  </template>
+  
+  <script>
+  export default {
     data() {
-        return {
-            quizCode: '123456', // Replace this with your actual quiz code
-        };
-    },
-    computed: {
-        players() {
-            return this.$store.state.players; // Assuming you have a Vuex store with a players array
-        },
+      return {
+        quizCode: '12345', // Replace with dynamic code
+        players: [] // This will be populated with connected players
+      };
     },
     methods: {
-        startQuiz() {
-            // Implement your logic to start the quiz
-        },
-        cancelQuiz() {
-            // Implement your logic to cancel the quiz
-        },
+      startQuiz() {
+        // Implement logic to start the quiz
+      },
+      cancelQuiz() {
+        // Implement logic to cancel the quiz
+      }
     },
-};
-</script>
-
-<style scoped>
-.quiz-page {
+    // Optionally, use created or mounted lifecycle hooks to load initial data
+    mounted() {
+      // Implement logic to load connected players, e.g., through a WebSocket connection
+    }
+  };
+  </script>
+  
+  <style>
+  .quiz-page {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: flex-start;
     padding: 20px;
+    box-sizing: border-box;
+    height: 100vh;
+  }
+  
+  .left-panel, .right-panel {
+    flex-basis: 45%;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .left-panel {
     background-color: #f5f5f5;
-}
-
-.quiz-info {
-    width: 45%;
-    padding: 20px;
+  }
+  
+  .right-panel {
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.quiz-info h2 {
+    overflow-y: auto;
+  }
+  
+  .quiz-code {
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
     margin-bottom: 20px;
+  }
+  
+  .quiz-code h2 {
+    margin: 0;
     color: #333;
-}
-
-.quiz-info button {
-    margin-right: 10px;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #007BFF;
     color: #fff;
+    font-size: 1rem;
     cursor: pointer;
-}
-
-.quiz-info button:last-child {
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  button:nth-child(1) {
+    background-color: #28a745;
+  }
+  
+  button:nth-child(2) {
     background-color: #dc3545;
-}
-
-.players-board {
-    width: 45%;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.players-board h2 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.players-board ul {
+  }
+  
+  ul {
     list-style-type: none;
-    padding-left: 0;
-}
-
-.players-board li {
+    padding: 0;
+  }
+  
+  li {
+    background-color: #f8f9fa;
+    border-radius: 5px;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.players-board li:last-child {
-    border-bottom: none;
-}
-</style>
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  h3 {
+    color: #333;
+    margin-top: 0;
+  }
+  </style>
+  
+  
