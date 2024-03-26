@@ -55,7 +55,7 @@
   }
   </script>
   
-  <style>
+  <style scoped>
   .teacher-page {
     display: flex;
     flex-direction: column;
