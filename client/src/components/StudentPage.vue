@@ -1,16 +1,16 @@
 <template>
     <div class="container">
-      <form @submit.prevent="submitForm">
-        <div class="input-group">
-          <label for="quiz-code">Quiz Code</label>
-          <input id="quiz-code" v-model="quizCode" type="text" required>
-        </div>
-        <div class="input-group">
-          <label for="username">Username</label>
-          <input id="username" v-model="username" type="text" required>
-        </div>
-        <button type="submit">Connect</button>
-      </form>
+      <div class="input-group">
+        <label for="quizCode">Quiz Code</label>
+        <input type="text" id="quizCode" v-model="quizCode" placeholder="Enter Quiz Code">
+      </div>
+  
+      <button @click="connectToQuiz">Connect</button>
+  
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" v-model="username" placeholder="Enter Username">
+      </div>
     </div>
   </template>
   
@@ -19,15 +19,16 @@
     data() {
       return {
         quizCode: '',
-        username: '',
+        username: ''
       };
     },
     methods: {
-      submitForm() {
-        // Handle form submission here
-      },
-    },
-  };
+      connectToQuiz() {
+        // Logic to connect to the quiz
+        console.log("Quiz Code:", this.quizCode, "Username:", this.username);
+      }
+    }
+  }
   </script>
   
   <style scoped>
@@ -35,28 +36,46 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .input-group {
     margin-bottom: 20px;
+    width: 100%;
   }
   
-  input {
+  input[type="text"] {
     width: 100%;
     padding: 10px;
-    box-sizing: border-box;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
   }
   
   button {
-    width: 100%;
-    padding: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     background-color: #4CAF50;
     color: white;
-    border: none;
     cursor: pointer;
+    font-size: 16px;
   }
   
   button:hover {
     background-color: #45a049;
   }
+  
+  label {
+    display: block;
+  }
+  
+  @media (max-width: 600px) {
+    .container {
+      width: 90%;
+    }
+  }
   </style>
+  
