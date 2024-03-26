@@ -43,7 +43,7 @@ export default {
 
 .back-button {
     position: absolute;
-    top: 2em;
+    top: 3cap;
     left: 1em;
 }
 

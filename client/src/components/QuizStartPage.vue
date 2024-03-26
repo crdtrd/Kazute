@@ -41,7 +41,7 @@
   };
   </script>
   
-  <style>
+  <style scoped>
   .quiz-page {
     display: flex;
     justify-content: space-around;
